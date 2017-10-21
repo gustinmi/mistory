@@ -425,7 +425,10 @@ footer h4 {
     margin-right: 5px;
 }
 
-
+.sub-menu{
+	display: none;
+	min-height: 300px;
+}
 
 
 

@@ -1,10 +1,11 @@
 // menu.js
-
 window.app.register('menu', function(app) {
 
     'use strict';
 
-    var exports = {};
+    var exports = {},
+        topMenuItems,
+        jqSubMenu;
 
     var config = {
     	selTopMenuItems : 'body .top-container nav.top-bar section > ul > li',
@@ -13,7 +14,8 @@ window.app.register('menu', function(app) {
 
     var startMenu = function(){
 
-    	var topMenuItems = $(config.selTopMenuItems);
+    	topMenuItems = $(config.selTopMenuItems);
+        jqSubMenu = $(config.selSubmenu);
         
         topMenuItems.on('click', function(e){
         	var clickedLi = $(this);
@@ -24,7 +26,7 @@ window.app.register('menu', function(app) {
 
     };
 
-    var renderLinks = function(links){
+    var renderLinks = function(links, level){
 
         var subTmp = window.sistory4.templates.subCategory;
         var buff = [];
@@ -32,33 +34,31 @@ window.app.register('menu', function(app) {
             if (!$(this).text()) return;
 
             if (idx === (links.length - 1)) { /* more link */
-                buff.push(subTmp.format($(this).text(), "display: block;", idx, 1));
+                buff.push(subTmp.format($(this).text(), "display: block;", idx, level));
             } else {
-                buff.push(subTmp.format($(this).text(), "display: none;", idx, 1));
+                buff.push(subTmp.format($(this).text(), "display: none;", idx, level));
 
             }
         });
 
-        return $(buff.join(""));
+        return $(buff.join("").replace(/>\s+</g,'><'));
     };
 
     var topMenuClicked = function(clickedLi){
 
 		var text = clickedLi.children('a').text(),
             links = clickedLi.children('ul').children('li:not(".title, .parent-link")').children('a'),
-            liIdx = clickedLi.index(),
-            jqSubMenu = $(config.selSubmenu);
-        
+            liIdx = clickedLi.index();
+            
         if (clickedLi.hasClass('active')) return false; // menu je že izbran
 
         app.root.breadcrumbs.add(text, 0);
         app.title(text);
-		
-        $('.collections').hide();
+        
         $('nav li a').removeClass('active');
         clickedLi.children('a').addClass('active');
 
-        var jqWrapper = renderLinks(links);
+        var jqWrapper = renderLinks(links, 1);
         jqWrapper.on('click', function(evt){
         	var subMenu = $(this);
         	evt.preventDefault();
@@ -79,22 +79,51 @@ window.app.register('menu', function(app) {
 
     var subMenuClicked = function(jqSubmenu, liIdx){
 
+        var jqWrapper;
     	var posOfLi = $('a', jqSubmenu).data('idx');
-    	var levelOfLi = $('a', jqSubmenu).data('level');
-    	var topMenuItems = $(config.selTopMenuItems);
+    	var levelOfLi = parseInt($('a', jqSubmenu).data('level')) + 1;
     	var subName = $('span.title', jqSubmenu).text();
 
-    	console.log("Sub item pos: {0}, level: {1}, name: {2}".format(posOfLi,levelOfLi, subName));
+    	console.log("Sub item pos: {0}, level: {1}, name: {2}".format(posOfLi, levelOfLi, subName));
 		app.root.breadcrumbs.add(subName, 1);
-
-		var parentLi = topMenuItems.eq(liIdx);
-		var subLi = parentLi.children('ul').children('li:not(".title, .parent-link")').eq(posOfLi);
-    	var subSub = subLi.children('ul').children('li:not(".title, .parent-link")');
-
     	debugger;
 
-    	return false;
+        var parentLi = topMenuItems.eq(liIdx);
+        var subLi = parentLi.children('ul').children('li:not(".title, .parent-link")').eq(posOfLi);
 
+        var subSub;
+        for (var i = 0; i < levelOfLi; i++){
+
+            subLi.children('ul')            
+
+            // poiščiu se v drevesu
+
+        }
+
+        //var subSub = subLi.children('ul').children('li:not(".title, .parent-link")');
+        var links = subSub .children('a');
+
+        if (links.length > 0){ // we have further navigation
+
+            jqWrapper = renderLinks(links, levelOfLi);
+
+            jqWrapper.on('click', function(evt){
+                var subMenu = $(this);
+                evt.preventDefault();
+                evt.stopPropagation();
+                subMenuClicked(subMenu, liIdx);
+            }); 
+
+            jqSubMenu.empty();
+            jqSubMenu.html('<div class="grid-x" class="sub-categories"></div>');
+            jqSubMenu.children('div.grid-x').append(jqWrapper);
+            jqSubMenu.show();
+        } else {
+            alert("WE need to implement results view");
+        }
+
+
+    	return false;
     };
 
     exports.start = function(item) {
