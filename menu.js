@@ -9,7 +9,8 @@ window.app.register('menu', function(app) {
 
     var config = {
 
-    	selTopMenuItems : 'body .top-container nav.top-bar section > ul > li'
+    	selTopMenuItems : 'body .top-container nav.top-bar section > ul > li',
+    	selSubmenu : 'section.sub-menu'
         
     };
 
@@ -31,7 +32,8 @@ window.app.register('menu', function(app) {
 
 		var liPos = clickedLi.index(),
             text = clickedLi.children('a').text(),
-            links = clickedLi.children('ul').children('li:not(".title, .parent-link")').children('a');
+            links = clickedLi.children('ul').children('li:not(".title, .parent-link")').children('a'),
+            jqSubMenu = $(config.selSubmenu);
         
         if (clickedLi.hasClass('active')) return false; // menu je že izbran
 
@@ -43,30 +45,35 @@ window.app.register('menu', function(app) {
         clickedLi.children('a').addClass('active');
 
         var subTmp = window.sistory4.templates.subCategory;
-        var buff = ['<div class="grid-x" class="sub-categories">'];
+        var buff = [];
         links.each(function(idx) {
             if (!$(this).text()) return;
 
             if (idx === (links.length - 1)) { /* more link */
-                buff.push(subTmp.format($(this).text(), "display: block;"));
+                buff.push(subTmp.format($(this).text(), "display: block;", idx));
             } else {
-                buff.push(subTmp.format($(this).text(), "display: none;"));
+                buff.push(subTmp.format($(this).text(), "display: none;", idx));
 
             }
         });
-        buff.push('</div>');
+        
+        var jqWrapper = $(buff.join(""));
+        jqWrapper.on('click', function(){
+        	//debugger;
+        	console.log("Sub item clicked" + $('a', this).data('ref'));
+        	return false;
+        }); 
 
-        $('section.sub-menu').empty().html(buff.join("")).show();
+        jqSubMenu.empty();
+        jqSubMenu.html('<div class="grid-x" class="sub-categories"></div>');
+        jqSubMenu.children('div.grid-x').append(jqWrapper);
+        jqSubMenu.show();
 
         // prikaži subkategorije
         $("div.subtitle").text(text);
         $("#sub").show();
 
-
     };
-
-
-
 
     exports.start = function(item) {
         return startMenu();

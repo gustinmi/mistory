@@ -7,7 +7,7 @@ window.sistory4 = {
 			<div class="large-4 medium-4 small-12 columns">\
 				<li class="list-item">\
 				    <div class="browse-entry">\
-				        <a href="#">\
+				        <a data-ref="{2}" href="#">\
 				            <div class="img">\
 				            	<img src="images/saved_resource(7)">\
 				            </div>\

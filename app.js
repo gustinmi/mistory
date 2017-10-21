@@ -23,6 +23,11 @@ App.prototype = {
     		$('title').text(this.titleTxt);
     	}
 
+    },
+
+    hashchange(hash){
+    	console.log("Hash changed" + hash);
+    	// todo : support bookmarkable urls
     }
 
 };
@@ -33,7 +38,10 @@ App.prototype = {
 	var app = new App("sistory 4"); 
 	window.app = app;
 	window.register = app.register;
-	document.addEventListener("DOMContentLoaded", function(event) {
+	document.addEventListener("DOMContentLoaded", function() {
 		app.onStart();	
+	});
+	window.addEventListener("hashchange",function(){
+		app.hashchange(document.location.hash);
 	});
 })();
