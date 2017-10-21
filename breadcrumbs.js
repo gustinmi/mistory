@@ -10,7 +10,7 @@ window.app.register('breadcrumbs', function(app) {
     };
 
     var addBreadcrumb = function(item, level) {
-        debugger;
+        //debugger;
         var newItem = { level: level, text: item },
             breadcrumbsCopy = [];
 

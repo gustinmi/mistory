@@ -7,16 +7,13 @@ window.app.register('menu', function(app) {
     var exports = {};
 
     var config = {
-
     	selTopMenuItems : 'body .top-container nav.top-bar section > ul > li',
     	selSubmenu : 'section.sub-menu'
-        
     };
 
     var startMenu = function(){
 
-    	var that = this,
-        	topMenuItems = $(config.selTopMenuItems);
+    	var topMenuItems = $(config.selTopMenuItems);
         
         topMenuItems.on('click', function(e){
         	var clickedLi = $(this);
@@ -27,21 +24,7 @@ window.app.register('menu', function(app) {
 
     };
 
-    var topMenuClicked = function(clickedLi){
-
-		var liPos = clickedLi.index(),
-            text = clickedLi.children('a').text(),
-            links = clickedLi.children('ul').children('li:not(".title, .parent-link")').children('a'),
-            jqSubMenu = $(config.selSubmenu);
-        
-        if (clickedLi.hasClass('active')) return false; // menu je že izbran
-
-        app.root.breadcrumbs.add(text, 0);
-        app.title(text);
-		
-        $('.collections').hide();
-        $('nav li a').removeClass('active');
-        clickedLi.children('a').addClass('active');
+    var renderLinks = function(links){
 
         var subTmp = window.sistory4.templates.subCategory;
         var buff = [];
@@ -55,13 +38,32 @@ window.app.register('menu', function(app) {
 
             }
         });
+
+        return $(buff.join(""));
+    };
+
+    var topMenuClicked = function(clickedLi){
+
+		var text = clickedLi.children('a').text(),
+            links = clickedLi.children('ul').children('li:not(".title, .parent-link")').children('a'),
+            liIdx = clickedLi.index(),
+            jqSubMenu = $(config.selSubmenu);
         
-        var jqWrapper = $(buff.join(""));
+        if (clickedLi.hasClass('active')) return false; // menu je že izbran
+
+        app.root.breadcrumbs.add(text, 0);
+        app.title(text);
+		
+        $('.collections').hide();
+        $('nav li a').removeClass('active');
+        clickedLi.children('a').addClass('active');
+
+        var jqWrapper = renderLinks(links);
         jqWrapper.on('click', function(evt){
         	var subMenu = $(this);
         	evt.preventDefault();
         	evt.stopPropagation();
-			subMenuClicked(subMenu);
+			subMenuClicked(subMenu, liIdx);
         }); 
 
         jqSubMenu.empty();
@@ -75,9 +77,8 @@ window.app.register('menu', function(app) {
 
     };
 
-    var subMenuClicked = function(jqSubmenu){
+    var subMenuClicked = function(jqSubmenu, liIdx){
 
-    	//debugger;
     	var posOfLi = $('a', jqSubmenu).data('idx');
     	var levelOfLi = $('a', jqSubmenu).data('level');
     	var topMenuItems = $(config.selTopMenuItems);
@@ -85,6 +86,12 @@ window.app.register('menu', function(app) {
 
     	console.log("Sub item pos: {0}, level: {1}, name: {2}".format(posOfLi,levelOfLi, subName));
 		app.root.breadcrumbs.add(subName, 1);
+
+		var parentLi = topMenuItems.eq(liIdx);
+		var subLi = parentLi.children('ul').children('li:not(".title, .parent-link")').eq(posOfLi);
+    	var subSub = subLi.children('ul').children('li:not(".title, .parent-link")');
+
+    	debugger;
 
     	return false;
 

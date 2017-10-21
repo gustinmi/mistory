@@ -13,6 +13,10 @@ App.prototype = {
 		'use strict';
 		this.root.menu.start();
 		this.title();
+
+		$('#logoImg').on('click', function(){
+			window.location.href = "index.html";
+		});
     },
 
     title : function(title){
