@@ -10,17 +10,16 @@ window.app.register('breadcrumbs', function(app) {
     };
 
     var addBreadcrumb = function(item, level) {
-
+        debugger;
         var newItem = { level: level, text: item },
             breadcrumbsCopy = [];
 
         $(breadcrumbs).each(function(idx, elt) {
             if (elt.level < level) {
                 breadcrumbsCopy.push(elt);
-            } else if (elt.level === level) {
-                breadcrumbsCopy.push(newItem);
             }
         });
+        breadcrumbsCopy.push(newItem);
 
         if (breadcrumbsCopy.length === 0) {
             breadcrumbs.push(newItem);
@@ -41,7 +40,7 @@ window.app.register('breadcrumbs', function(app) {
 
         $(breadcrumbs).each(function(idx, elt) {
             if (idx === (breadcrumbs.length - 1)) { // last
-                buff.push(window.sistory4.templates.breadcrumbsItem.format(elt.text, 'active'));
+                buff.push(window.sistory4.templates.breadcrumbsLastItem.format(elt.text));
             } else {
                 buff.push(window.sistory4.templates.breadcrumbsItem.format(elt.text));
             }
@@ -56,8 +55,8 @@ window.app.register('breadcrumbs', function(app) {
 
     };
 
-    exports.add = function(item) {
-        return addBreadcrumb(item);
+    exports.add = function(item, level) {
+        return addBreadcrumb(item, level);
     };
 
     exports.config = function(key, val) {

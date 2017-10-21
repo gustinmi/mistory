@@ -7,7 +7,7 @@ window.sistory4 = {
 			<div class="large-4 medium-4 small-12 columns">\
 				<li class="list-item">\
 				    <div class="browse-entry">\
-				        <a data-ref="{2}" href="#">\
+				        <a data-menu="{4}" data-level="{3}" data-idx="{2}" href="#">\
 				            <div class="img">\
 				            	<img src="images/saved_resource(7)">\
 				            </div>\
@@ -28,7 +28,9 @@ window.sistory4 = {
 		    	{0}\
 			</ul>',
 
-		breadcrumbsItem : '<li class="{1}"><span><strong>{0}</strong></span></li>' 		
+		breadcrumbsItem : '<li><a href="#">{0}</a></li>', 		
+
+		breadcrumbsLastItem : '<li class="active"><span><strong>{0}</strong></span></li>' 		
 
 	}
 };

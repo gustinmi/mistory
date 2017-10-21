@@ -4,8 +4,7 @@ window.app.register('menu', function(app) {
 
     'use strict';
 
-    var exports = {},
-        breadcrumbs = [];
+    var exports = {};
 
     var config = {
 
@@ -50,18 +49,19 @@ window.app.register('menu', function(app) {
             if (!$(this).text()) return;
 
             if (idx === (links.length - 1)) { /* more link */
-                buff.push(subTmp.format($(this).text(), "display: block;", idx));
+                buff.push(subTmp.format($(this).text(), "display: block;", idx, 1));
             } else {
-                buff.push(subTmp.format($(this).text(), "display: none;", idx));
+                buff.push(subTmp.format($(this).text(), "display: none;", idx, 1));
 
             }
         });
         
         var jqWrapper = $(buff.join(""));
-        jqWrapper.on('click', function(){
-        	//debugger;
-        	console.log("Sub item clicked" + $('a', this).data('ref'));
-        	return false;
+        jqWrapper.on('click', function(evt){
+        	var subMenu = $(this);
+        	evt.preventDefault();
+        	evt.stopPropagation();
+			subMenuClicked(subMenu);
         }); 
 
         jqSubMenu.empty();
@@ -72,6 +72,21 @@ window.app.register('menu', function(app) {
         // prikaži subkategorije
         $("div.subtitle").text(text);
         $("#sub").show();
+
+    };
+
+    var subMenuClicked = function(jqSubmenu){
+
+    	//debugger;
+    	var posOfLi = $('a', jqSubmenu).data('idx');
+    	var levelOfLi = $('a', jqSubmenu).data('level');
+    	var topMenuItems = $(config.selTopMenuItems);
+    	var subName = $('span.title', jqSubmenu).text();
+
+    	console.log("Sub item pos: {0}, level: {1}, name: {2}".format(posOfLi,levelOfLi, subName));
+		app.root.breadcrumbs.add(subName, 1);
+
+    	return false;
 
     };
 
