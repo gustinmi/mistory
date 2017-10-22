@@ -17,6 +17,14 @@ App.prototype = {
 		$('#logoImg').on('click', function(){
 			window.location.href = "index.html";
 		});
+
+
+		$('.top-container').on('click', function(){
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+			return false;
+		});
+
+
     },
 
     title : function(title){

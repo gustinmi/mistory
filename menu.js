@@ -96,7 +96,7 @@ window.app.register('menu', function(app) {
         //var subSub;
     	if (levelOfLi == 3){
 
-            alert("open details");
+            app.root.results.show();
 
         }else{
 
