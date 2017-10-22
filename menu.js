@@ -19,11 +19,24 @@ window.app.register('menu', function(app) {
         
         topMenuItems.on('click', function(e){
         	var clickedLi = $(this);
+            var link = clickedLi.children('a');
+            var menuId = link.attr('id');
+            var text = link.text();
         	e.preventDefault();
-        	topMenuClicked(clickedLi);
-        	return false;
-        });
+            if (clickedLi.hasClass('active')) return false; // menu je že izbran
 
+            $('nav li a').removeClass('active');
+            clickedLi.children('a').addClass('active');
+
+        	topMenuClicked(clickedLi);
+
+            // prikaži subkategorije
+            $("div.subtitle").text(text);
+            $("#sub").show();
+            jqSubMenu.show();
+        	
+            return false;
+        });
     };
 
     var renderLinks = function(links, level){
@@ -45,19 +58,14 @@ window.app.register('menu', function(app) {
     };
 
     var topMenuClicked = function(clickedLi){
-
+        debugger;
 		var text = clickedLi.children('a').text(),
             links = clickedLi.children('ul').children('li:not(".title, .parent-link")').children('a'),
             liIdx = clickedLi.index();
             
-        if (clickedLi.hasClass('active')) return false; // menu je že izbran
-
         app.root.breadcrumbs.add(text, 0);
         app.title(text);
         
-        $('nav li a').removeClass('active');
-        clickedLi.children('a').addClass('active');
-
         var jqWrapper = renderLinks(links, 1);
         jqWrapper.on('click', function(evt){
         	var subMenu = $(this);
@@ -66,15 +74,10 @@ window.app.register('menu', function(app) {
 			subMenuClicked(subMenu, liIdx);
         }); 
 
+        // add new subcategories to listview
         jqSubMenu.empty();
         jqSubMenu.html('<div class="grid-x" class="sub-categories"></div>');
         jqSubMenu.children('div.grid-x').append(jqWrapper);
-        jqSubMenu.show();
-
-        // prikaži subkategorije
-        $("div.subtitle").text(text);
-        $("#sub").show();
-
     };
 
     var subMenuClicked = function(jqSubmenu, liIdx){
@@ -86,43 +89,38 @@ window.app.register('menu', function(app) {
 
     	console.log("Sub item pos: {0}, level: {1}, name: {2}".format(posOfLi, levelOfLi, subName));
 		app.root.breadcrumbs.add(subName, 1);
-    	debugger;
 
         var parentLi = topMenuItems.eq(liIdx);
         var subLi = parentLi.children('ul').children('li:not(".title, .parent-link")').eq(posOfLi);
 
-        var subSub;
-        for (var i = 0; i < levelOfLi; i++){
+        //var subSub;
+    	if (levelOfLi == 3){
 
-            subLi.children('ul')            
+            alert("open details");
 
-            // poiščiu se v drevesu
+        }else{
 
+            var subSub = subLi.children('ul').children('li:not(".title, .parent-link")');
+            var links = subSub .children('a');
+
+            if (links.length > 0){ // we have further navigation
+
+                jqWrapper = renderLinks(links, levelOfLi);
+
+                jqWrapper.on('click', function(evt){
+                    var subMenu = $(this);
+                    evt.preventDefault();
+                    evt.stopPropagation();
+                    subMenuClicked(subMenu, liIdx);
+                }); 
+
+                jqSubMenu.empty();
+                jqSubMenu.html('<div class="grid-x" class="sub-categories"></div>');
+                jqSubMenu.children('div.grid-x').append(jqWrapper);
+                jqSubMenu.show();
+            }
         }
-
-        //var subSub = subLi.children('ul').children('li:not(".title, .parent-link")');
-        var links = subSub .children('a');
-
-        if (links.length > 0){ // we have further navigation
-
-            jqWrapper = renderLinks(links, levelOfLi);
-
-            jqWrapper.on('click', function(evt){
-                var subMenu = $(this);
-                evt.preventDefault();
-                evt.stopPropagation();
-                subMenuClicked(subMenu, liIdx);
-            }); 
-
-            jqSubMenu.empty();
-            jqSubMenu.html('<div class="grid-x" class="sub-categories"></div>');
-            jqSubMenu.children('div.grid-x').append(jqWrapper);
-            jqSubMenu.show();
-        } else {
-            alert("WE need to implement results view");
-        }
-
-
+        
     	return false;
     };
 
