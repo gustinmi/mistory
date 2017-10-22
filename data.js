@@ -145,7 +145,7 @@ window.publicationData =[
 	{
 	    img : "http://www.sistory.si/publikacije/image/?id=4896&width=161&height=227", 
 	    naziv : "Arhiv Republike Slovenije",
-	    desc : 'Založba: Arhiv Republike Slovenije Naslov: Zvezdarska 1, 1127 Ljubljana, Slovenija Kontakti: e-pošta, Tel: + 386 (0)1 2414200, Fax: +386 (0)1 2414269',
+	    desc : 'ZIzdaja je primarno dostopna v Digitalni knjižnici Pedagoškega inštituta. Jezik: slovenski Vrsta gradiva: Besedilo Leto: 2009 Ključne besede: muzejska pedagogika, Museum pedagogics Založnik(i): Pedagoški inštitut, Ljubljana Zbirka: Digitalna knjižnica. Dissertationes',
 	    kategorija : "Literatura / Monografije",
 	    tip : "Založba",
 	    media : "link",

@@ -26,7 +26,7 @@ App.prototype = {
 
 		$('section.collections .coll-item').on('click', function(){
             debugger;
-            app.root.breadcrumbs.addMore([$('.title', this).text(), $('.category-flag', this).text()], 1);
+            //app.root.breadcrumbs.addMore([$('.title', this).text(), $('.category-flag', this).text()], 1);
 			app.root.results.show();
 			return false;
 		});

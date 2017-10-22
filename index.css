@@ -174,7 +174,7 @@ ul.search-tags {
 }
 
 ul.search-category li {
-
+	display: block;
 	cursor: pointer;
 	color: #4d4d4d;
     font-size: .875em;
@@ -184,6 +184,10 @@ ul.search-category li {
 
 ul.search-category li:hover {
 	background-color: #ddd;
+}
+
+.dropdown-pane {
+    width: 120px!important;
 }
 
 
