@@ -30,7 +30,7 @@ window.app.register('results', function(app) {
 
         });
 
-        jqSubMenu.empty().html('<ol></ol>');
+        jqSubMenu.empty().html(window.sistory4.templates.resultBanner);
         jqSubMenu.children('ol').append($(buff.join("").replace(/>\s+</g,'><')));
         
     };

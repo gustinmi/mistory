@@ -93,6 +93,7 @@ section.main-content .contents {
 	display: inline-block;
 	line-height: 45.57px;
     width: 100%;
+    padding-left: 105px;
 }
 
 .top-bar * {
@@ -518,3 +519,68 @@ footer h4 {
 .search-list-item .inner img {
 	border: 1px #e1e1e1 solid;
 }
+
+.result-info {
+	padding-left: 110px;
+}
+
+
+.results-header {
+    font-size: .875rem;
+    margin-bottom: 1.6rem;
+    overflow: hidden;
+    padding: .65rem .4rem;
+}
+
+.result-info {
+    margin-left: 5.66038%;
+    margin-top: 3em;
+    top: 1em;
+    width: 100%;
+}
+
+.result-viewtype {
+    float: right;
+    margin-left: .8rem;
+}
+
+.button-bar {
+    display: table;
+    table-layout: fixed;
+    white-space: nowrap;
+}
+
+.button-bar>.button-bar__item:first-child {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border: 1px solid #095f90;
+    padding: 5px;
+    padding-left: 15px;
+    border-right-style: none;
+}
+
+.button-bar>.button-bar__item:last-child {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border: 1px solid #095f90;
+    padding: 5px;
+    padding-right: 15px;
+    border-left-style: none;
+}
+
+.button-bar img{
+	margin-right: 5px;
+}
+
+
+.button-bar__item {
+    display: table-cell;
+    width: auto;
+    border-radius: 0;
+}
+
+.button-bar-small .button-bar__item:first-child>.button-bar__button {
+    border-right: 1px solid #dedede;
+    width: auto;
+}
+

@@ -50,7 +50,7 @@ window.sistory4 = {
 		                <ul class="item-concepts comma-list">\
 		                    <li>{3}</li>\
 		                </ul>\
-		                <div class="item-origin"><a href="" class="external" target="_blank">{4}</a>\
+		                <div class="item-origin"><a href="#" class="external" target="_blank">{4}</a>\
 		                </div>\
 		                <footer>\
 		                    <div class="item-metadata">\
@@ -60,7 +60,27 @@ window.sistory4 = {
 		                </footer>\
 		            </div>\
 		        </article>\
-		    </li>'
+		    </li>',
+
+		resultBanner : '<div class="results-header">\
+		    <div class="result-info">1 - 10 od 123 rezultatov</div>\
+		    <div class="result-viewtype">\
+		        <ul class="button-bar button-bar-small">\
+		        <li class="button-bar__item">\
+		            <a href="" class="button-bar__button" role="button">\
+		                <img src="images/grid.png">Mreža\
+		            </a>\
+		        </li>\
+		        <li class="button-bar__item">\
+		            <a href="" class="button-bar__button" role="button">\
+		                <img src="images/list.png">Seznam\
+		            </a>\
+		        </li>\
+		        </ul>   \
+		    </div>\
+		</div>\
+		<ol></ol>'
+
 	}
 };
 

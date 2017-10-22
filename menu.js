@@ -58,7 +58,7 @@ window.app.register('menu', function(app) {
     };
 
     var topMenuClicked = function(clickedLi){
-        debugger;
+        //debugger;
 		var text = clickedLi.children('a').text(),
             links = clickedLi.children('ul').children('li:not(".title, .parent-link")').children('a'),
             liIdx = clickedLi.index();
