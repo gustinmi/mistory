@@ -118,6 +118,8 @@ window.app.register('menu', function(app) {
                 jqSubMenu.html('<div class="grid-x" class="sub-categories"></div>');
                 jqSubMenu.children('div.grid-x').append(jqWrapper);
                 jqSubMenu.show();
+            }else{
+                app.root.results.show();
             }
         }
         
