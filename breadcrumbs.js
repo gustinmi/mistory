@@ -55,6 +55,26 @@ window.app.register('breadcrumbs', function(app) {
 
     };
 
+    var addMoreBreadcrumbs =  function(arr, fromLevel) {
+
+        debugger;
+
+        if ($(arr).isArray()){
+            addBreadcrumb(arr[0], fromLevel);
+            if (arr.length > 1){
+
+                $(arr).each(function(idx, elt){
+                    if (idx === 0) return true;
+                    addBreadcrumb(elt, fromLevel + idx);
+                });
+            }
+        }
+    };
+
+    exports.addMore = function(arr, fromLevel) {
+        return addMoreBreadcrumbs(arr, fromLevel);
+    };
+
     exports.add = function(item, level) {
         return addBreadcrumb(item, level);
     };

@@ -10,14 +10,22 @@ window.app.register('results', function(app) {
         selSubmenu : 'section.sub-menu'
     };
 
+    var openResult = function(item){
+
+        app.root.item.show();
+
+    };
 
     var showResults = function() {
-        var jqSubMenu = $(config.selSubmenu),
-            buff = [];
+        var buff = [];
+
+        jqSubMenu = $(config.selSubmenu);
+
+        jqSubMenu.empty().html(window.sistory4.templates.resultBanner).show();
 
         $(window.publicationData).each(function(idx, elt){
 
-            buff.push(window.sistory4.templates.resultItem.format(
+            var jqWrapper  = $(window.sistory4.templates.resultItem.format(
                 elt.img,
                 elt.naziv,
                 elt.desc,
@@ -25,17 +33,22 @@ window.app.register('results', function(app) {
                 elt.kategorija,
                 elt.media,
                 elt.mediaNaziv
+            ).replace(/>\s+</g,'><'));
 
-            ));
+            $('h2 a', jqWrapper).on('click', function(evt){
+                evt.preventDefault();
+                evt.stopPropagation();
+                openResult($(this));
+            }); 
+
+            jqSubMenu.children('ol').append(jqWrapper);
 
         });
 
-        jqSubMenu.empty().html(window.sistory4.templates.resultBanner);
-        jqSubMenu.children('ol').append($(buff.join("").replace(/>\s+</g,'><')));
         
     };
 
-    exports.show = function(item, level) {
+    exports.show = function() {
         return showResults();
     };
 

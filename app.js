@@ -24,6 +24,13 @@ App.prototype = {
 			return false;
 		});
 
+		$('section.collections .coll-item').on('click', function(){
+            debugger;
+            app.root.breadcrumbs.addMore([$('.title', this).text(), $('.category-flag', this).text()], 1);
+			app.root.results.show();
+			return false;
+		});
+
 
     },
 
@@ -37,7 +44,7 @@ App.prototype = {
 
     },
 
-    hashchange(hash){
+    hashchange : function(hash){
     	console.log("Hash changed" + hash);
     	// todo : support bookmarkable urls
     }

@@ -79,7 +79,63 @@ window.sistory4 = {
 		        </ul>   \
 		    </div>\
 		</div>\
-		<ol></ol>'
+		<ol></ol>',
+
+		item :
+			'<section class="object-display" id="maincontent"> \
+			    <div class="object-media-wrap single-item "> \
+			        <div class="media-viewer">\
+			            <div class="single-item-thumb">\
+			                <div>\
+			                    <div class="inner">\
+			                        <a href="#">\
+			                            <span title="Odpri ta predstavnostni element" class="image">\
+			                            <img src="http://www.sistory.si/publikacije/image/?id=911&width=247&height=350">\
+			                        </a>\
+			                    </div>\
+			                </div>\
+			            </div>\
+			        </div>\
+			    </div>\
+			    <span class="downloads">Prenesi</span>\
+			</section>',
+
+		itemDetails : 
+			'<div class="lc">\
+		        <div class="object-overview">\
+		            <div class="data-section no-border object-title cf">\
+		                <h3 class="subsection-label">Naziv</h3>\
+		                <div class="subsection-content">\
+		                    <h2 class="object-title">Homo spectator\n Uvod v muzejsko pedagogiko\n [elektronski vir]</h2>\
+		                </div>\
+		            </div>\
+		            <div class="data-section cf">\
+		                <h3 class="subsection-label">Splošno</h3>\
+		                <div class="subsection-content">\
+		                    <ul class="data-group">\
+		                        {0}\
+		                    </ul>\
+		                </div>\
+		            </div>\
+		        </div>\
+		        <div class="object-actions cf">\
+				    <h4>Več informacij</h4>\
+				    <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/2.5/si/"><img alt="Creative Commons licenca" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/2.5/si/88x31.png"></a>\
+				    <h4>Trajna povezava</h4>\
+				    <a href="http://hdl.handle.net/11686/911">http://hdl.handle.net/11686/911</a>\
+				    <h4>COBBIS</h4>\
+				    <a href="#">COBISS.SI-ID 247238656</a>\
+				 </div>\
+			 </div>',
+
+		itemDetailsLi : '<li>\
+		    <section>\
+		        <h4 class="data-header">{0}</h4>\
+		        <ul class="comma-list data-group">\
+		            <li><a href="#">{1}</a></li>\
+		        </ul>\
+		    </section>\
+		 </li>'	 	
 
 	}
 };
@@ -89,7 +145,7 @@ window.publicationData =[
 	{
 	    img : "http://www.sistory.si/publikacije/image/?id=4896&width=161&height=227", 
 	    naziv : "Arhiv Republike Slovenije",
-	    desc : 'Založba: Arhiv Republike Slovenije\n Naslov: Zvezdarska 1, 1127 Ljubljana, Slovenija\n Kontakti: e-pošta, Tel: + 386 (0)1 2414200, Fax: +386 (0)1 2414269',
+	    desc : 'Založba: Arhiv Republike Slovenije Naslov: Zvezdarska 1, 1127 Ljubljana, Slovenija Kontakti: e-pošta, Tel: + 386 (0)1 2414200, Fax: +386 (0)1 2414269',
 	    kategorija : "Literatura / Monografije",
 	    tip : "Založba",
 	    media : "link",
@@ -168,5 +224,39 @@ window.publicationData =[
 	    media : "img",
 	    mediaNaziv : "Slika"
 	}
+];
 
+window.pubDetails = [
+	{
+		key : "Avtor(ji):",
+		item: "Tavčar, Lidija"
+	},
+	{
+		key : "Jezik:",
+		item: "slovenski"
+	},
+	{
+		key : "Vrsta gradiva:",
+		item: "Besedilo"
+	},
+	{
+		key : "Leto:",
+		item: "2009"
+	},
+	{
+		key : "Ključne besede:",
+		item: "muzejska pedagogika, Museum pedagogics"
+	},
+	{
+		key : "Založnik(i):",
+		item: "Pedagoški inštitut, Ljubljana"
+	},
+	{
+		key : "Zbirka:",
+		item: "Digitalna knjižnica. Dissertationes"
+	},
+	{
+		key : "Identifier:",
+		item: "COBISS.SI-ID 247238656"
+	}
 ];
